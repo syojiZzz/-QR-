@@ -1,11 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>a</title>
+    <meta charset="UTF-8">
+    <title>見ちゃったね</title>
+    <style>
+        body {
+            background-color: #fafafa;
+            color: #222222;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .content {
+            margin-bottom: 40px;
+        }
+        .counter-box {
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  QRコード読み込んだんだ（笑）
-なんも意味あることなんて書いてないよ！！！！
+
+    <h1>見ちゃったね</h1>
+    
+    <div class="content">
+        <p>意味あることなんて書いてないよ(笑)</p>
+        <p>頑張って作ったのでイカす!お願いします！</p>
+    </div>
+
+    <div class="counter-box">
+        訪問者数: <span id="visitor-count">読み込み中...</span> 人
+    </div>
+
+    <script>
+        // 稼働中の代替カウンターAPIを使用
+        // ※「my-site-unique-key-2026」の部分は、他の人と被らないように適当な英数字に変えてね
+        const uniqueKey = "my-site-unique-key-2026";
+
+        fetch(`https://countapi.mileshilliard.com/api/v1/hit/${uniqueKey}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitor-count').textContent = data.value;
+            })
+            .catch(error => {
+                console.error('カウンターの読み込みに失敗しました', error);
+                document.getElementById('visitor-count').textContent = '---';
+            });
+    </script>
+
 </body>
 </html>
